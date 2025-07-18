@@ -101,6 +101,85 @@ class ProizvodController extends Controller
 
 
 
+    public function show($id){
+
+        try{
+
+            $proizvod = Proizvod::findOrFail($id);
+            return new ProizvodResource($proizvod);
+        
+        }catch (\Exception $e) {
+               
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Neuspesno ucitavanje proizvoda. Pokusajte ponovo.',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+    }
+
+
+
+    public function update(Request $request, $id)
+    {
+        try{
+
+
+            $user = Auth::user();
+            if($user->role!='Shop Manager'){
+                return response()->json([
+                    'error' => 'Nemate dozvolu za kreiranje proizvoda.',
+                ], 403); 
+            }
+
+            $validated = $request->validate([
+                'naziv' => 'required|string|max:255',
+                'opis' => 'required|string',
+                'cena'=> 'required|numeric',
+                'slika' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  
+                'kategorija_id'=>'required|exists:kategorije,id',
+                'stilovi' => 'required|array',
+                'stilovi.*.id' => 'exists:stilovi,id',
+            ]);
+    
+           
+            $proizvod = Proizvod::findOrFail($id);
+            $proizvod->naziv = $validated['naziv'];
+            $proizvod->opis = $validated['opis'];
+            $proizvod->cena = $validated['cena'];
+            $proizvod->kategorija_id = $validated['kategorija_id'];
+
+            $proizvod->stilovi()->detach();
+            $stilovi = collect($request->stilovi)->pluck('id');
+            $proizvod->stilovi()->sync($stilovi);
+
+
+            if ($request->hasFile('slika')) {
+                if (File::exists($proizvod->putanja_slike)) {
+                    File::delete($proizvod->putanja_slike);
+                }
+               $proizvod->putanja_slike =  $this->uploadImage($request->file('slika'),$validated['naslov']);
+    
+            }
+
+            $proizvod->save();
+
+            return response()->json([
+                'message' => 'Proizvod uspešno ažuriran',
+                'clanak' => $proizvod,
+            ], 200);
+        }catch (\Exception $e) {
+               
+            return response()->json([
+                'success' => false,
+                'message' =>   'Proizvod nije pronađen',
+                'error' => $e->getMessage(),
+            ], 404);
+        }
+      
+      
+    }
+
 
 
     private function uploadImage($file, $naziv)

@@ -24,8 +24,11 @@ Route::post('/stilovi',[StilController::class,'store']);
 Route::apiResource('clanci', ClanakController::class);
 
 Route::post('proizvodi',[ProizvodController::class,'store']);
-
+Route::put('proizvodi/{id}',[ProizvodController::class,'update']);
 Route::get('proizvodi',[ProizvodController::class,'index']);
+Route::get('proizvodi/{id}',[ProizvodController::class,'show']);
+
+
 });
 
 
