@@ -5,6 +5,9 @@ import Login from './Components/Login';
 import RegistrationPage from './Components/RegistrationPage';
 import StyleSurvey from './Components/StyleSurvey';
 import ClothingTypesPage from './Components/ClothingTypesPage';
+import ProductsPage from './Components/ProductsPage';
+import Preporuke from './Components/Preporuke';
+import Blog from './Components/Blog';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
           <Route path="/registracija" element={<RegistrationPage />} />  
           <Route path="/anketa" element={<StyleSurvey />} />  
           <Route path="/shop" element={<ClothingTypesPage />} />  
+           <Route path="/blog" element={<Blog />} />  
+          <Route path="/preporuke" element={<Preporuke />} />  
+          <Route path="/shop/:type" element={<ProductsPage/>} />
         </Routes>
       </div>
     </Router>
