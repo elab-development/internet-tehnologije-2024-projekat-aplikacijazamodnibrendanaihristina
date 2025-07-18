@@ -10,6 +10,10 @@ import ProductsPage from './Components/ProductsPage';
 import Preporuke from './Components/Preporuke';
 import NewsDetailPage from './Components/NewsDetailPage';
 import AddNewsPage from './Components/AddNewsPage';
+import AddCategoryPage from './Components/AddCategoryPage';
+import OrdersPage from './Components/OrdersPage';
+import AddStylePage from './Components/AddStylePage';
+import AddProductPage from './Components/AddProductPage';
 function App() {
   return (
     <Router>
@@ -23,7 +27,11 @@ function App() {
            <Route path="/preporuke" element={<Preporuke />} />  
           <Route path="/shop/:type" element={<ProductsPage/>} />
           <Route path="/blog/:newsId" element={<NewsDetailPage/>} />
-          <Route path="/dodaj-clanak" element={<AddNewsPage />} />    
+          <Route path="/dodaj-clanak" element={<AddNewsPage />} />  
+           <Route path="/dodaj-kategoriju" element={<AddCategoryPage />} />  
+          <Route path="/porudzbine" element={<OrdersPage />} />  
+          <Route path="/dodaj-stil" element={<AddStylePage />} />  
+          <Route path="/dodaj-proizvod" element={<AddProductPage />} />    
         </Routes>
       </div>
     </Router>
