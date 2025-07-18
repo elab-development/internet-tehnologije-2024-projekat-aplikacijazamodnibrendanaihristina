@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/kategorije',[KategorijaController::class,'store']);
 Route::get('/kategorije', [KategorijaController::class, 'index']);
 
+Route::post('/stilovi',[StilController::class,'store']);
 
 });
 
