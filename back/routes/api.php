@@ -8,7 +8,7 @@ use App\Http\Controllers\KategorijaController;
 use App\Http\Controllers\ClanakController;
 use App\Http\Controllers\ProizvodController;
 use App\Http\Controllers\KorpaController;
-
+use App\Http\Controllers\PorudzbinaController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -32,6 +32,11 @@ Route::get('proizvodi/{id}',[ProizvodController::class,'show']);
 
 Route::post('korpa/dodaj',[KorpaController::class,'dodajUKorpu']);
 Route::post('korpa/izbaci',[KorpaController::class,'izbaciIzKorpe']);
+Route::get('korpa/prikaz',[KorpaController::class,'prikazKorpe']);
+
+
+Route::get('porudzbine',[PorudzbinaController::class,'index']);
+Route::post('porudzbine',[PorudzbinaController::class,'store']);
 });
 
 
