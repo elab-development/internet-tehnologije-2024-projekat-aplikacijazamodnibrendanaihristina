@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StilController;
 use App\Http\Controllers\KategorijaController;
 use App\Http\Controllers\ClanakController;
+use App\Http\Controllers\ProizvodController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -22,7 +23,9 @@ Route::post('/stilovi',[StilController::class,'store']);
 
 Route::apiResource('clanci', ClanakController::class);
 
+Route::post('proizvodi',[ProizvodController::class,'store']);
 
+Route::get('proizvodi',[ProizvodController::class,'index']);
 });
 
 
