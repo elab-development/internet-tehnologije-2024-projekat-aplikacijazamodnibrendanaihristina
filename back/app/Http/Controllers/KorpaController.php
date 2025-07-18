@@ -98,6 +98,24 @@ class KorpaController extends Controller
         }
 
 
+         public function prikazKorpe(){
+            try{
+                $korisnik = Auth::user();
+                $korisnikId = $korisnik->id;
+                Log::info('Korisnik id:' . $korisnikId);
+                $korpaStavke  = Korpa::with('proizvod')->where('korisnik_id', $korisnikId)->get();
+                $ukupnaCena = $korpaStavke->sum(function ($stavka) {
+                    return $stavka->kolicina * $stavka->proizvod->cena;
+                });
+
+               return response()->json(['stavke_korpe'=>KorpaResource::collection($korpaStavke),'ukupna_cena'=>$ukupnaCena,'korisnik'=>$korisnik]);
+
+            }catch (\Exception $e) {
+                return response()->json(['error' => 'Došlo je do greške: ' . $e->getMessage()], 500);
+            }
+        }
+
+
       
 
 }
