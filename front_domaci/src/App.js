@@ -8,6 +8,9 @@ import ClothingTypesPage from './Components/ClothingTypesPage';
 import ProductsPage from './Components/ProductsPage';
 import Preporuke from './Components/Preporuke';
 import Blog from './Components/Blog';
+import NewsDetailPage from './Components/NewsDetailPage';
+import AddNewsPage from './Components/AddNewsPage';
+import AddCategoryPage from './Components/AddCategoryPage';
 
 function App() {
   return (
@@ -21,6 +24,10 @@ function App() {
            <Route path="/blog" element={<Blog />} />  
           <Route path="/preporuke" element={<Preporuke />} />  
           <Route path="/shop/:type" element={<ProductsPage/>} />
+          <Route path="/blog/:newsId" element={<NewsDetailPage/>} />
+          <Route path="/dodaj-clanak" element={<AddNewsPage />} />  
+          <Route path="/dodaj-kategoriju" element={<AddCategoryPage />} />  
+
         </Routes>
       </div>
     </Router>
