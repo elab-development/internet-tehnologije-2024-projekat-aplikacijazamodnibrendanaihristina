@@ -11,6 +11,9 @@ import Blog from './Components/Blog';
 import NewsDetailPage from './Components/NewsDetailPage';
 import AddNewsPage from './Components/AddNewsPage';
 import AddCategoryPage from './Components/AddCategoryPage';
+import OrdersPage from './Components/OrdersPage';
+import AddStylePage from './Components/AddStylePage';
+import AddProductPage from './Components/AddProductPage';
 
 function App() {
   return (
@@ -27,7 +30,9 @@ function App() {
           <Route path="/blog/:newsId" element={<NewsDetailPage/>} />
           <Route path="/dodaj-clanak" element={<AddNewsPage />} />  
           <Route path="/dodaj-kategoriju" element={<AddCategoryPage />} />  
-
+          <Route path="/porudzbine" element={<OrdersPage />} />  
+          <Route path="/dodaj-stil" element={<AddStylePage />} />  
+          <Route path="/dodaj-proizvod" element={<AddProductPage />} />  
         </Routes>
       </div>
     </Router>
