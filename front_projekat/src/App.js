@@ -14,6 +14,8 @@ import AddCategoryPage from './Components/AddCategoryPage';
 import OrdersPage from './Components/OrdersPage';
 import AddStylePage from './Components/AddStylePage';
 import AddProductPage from './Components/AddProductPage';
+import FashionGallery from './Components/FashionGallery';
+
 function App() {
   return (
     <Router>
@@ -31,7 +33,8 @@ function App() {
            <Route path="/dodaj-kategoriju" element={<AddCategoryPage />} />  
           <Route path="/porudzbine" element={<OrdersPage />} />  
           <Route path="/dodaj-stil" element={<AddStylePage />} />  
-          <Route path="/dodaj-proizvod" element={<AddProductPage />} />    
+          <Route path="/dodaj-proizvod" element={<AddProductPage />} /> 
+          <Route path="/galerija" element={<FashionGallery />} />     
         </Routes>
       </div>
     </Router>
