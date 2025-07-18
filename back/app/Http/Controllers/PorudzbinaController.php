@@ -111,7 +111,39 @@ class PorudzbinaController extends Controller
      
     }
 
+     public function update(Request $request, $id){
 
+        try{
+
+            $user = Auth::user();
+            if($user->role!='Shop Manager'){
+                return response()->json([
+                    'error' => 'Nemate dozvolu za da izvrsite porudzbinu.',
+                ], 403); 
+            }
+
+           $validated = $request->validate([
+                'status' => 'required|in:Primljena,Kompletirana', 
+            ]);
+
+
+            $porudzbina = Porudzbina::findOrFail($id);
+            $porudzbina->status=$validated['status'];
+            $porudzbina->save();
+
+            return response()->json([
+                'message' => 'Porudzbina uspešno azurirana!',
+                'data' => $porudzbina,
+            ], 201); 
+
+        }catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Došlo je do greške pri azuriranju porudzbine.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
   
 }

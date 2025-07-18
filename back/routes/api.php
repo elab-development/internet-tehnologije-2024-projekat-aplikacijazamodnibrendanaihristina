@@ -37,6 +37,7 @@ Route::get('korpa/prikaz',[KorpaController::class,'prikazKorpe']);
 
 Route::get('porudzbine',[PorudzbinaController::class,'index']);
 Route::post('porudzbine',[PorudzbinaController::class,'store']);
+Route::put('porudzbine/{id}',[PorudzbinaController::class,'update']);
 });
 
 
