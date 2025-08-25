@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clanci', function (Blueprint $table) {
-            $table->id();
-           
-            $table->string('naslov');
-            $table->string('slika');
-            $table->timestamps();
+        Schema::table('proizvodi', function (Blueprint $table) {
+             $table->renameColumn('karakteristike', 'opis');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clanci');
+        Schema::table('proizvodi', function (Blueprint $table) {
+          $table->renameColumn('opis', 'karakteristike');
+        });
     }
 };

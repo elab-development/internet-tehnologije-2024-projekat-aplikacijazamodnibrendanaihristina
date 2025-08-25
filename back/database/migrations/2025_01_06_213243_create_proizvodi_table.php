@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('proizvodi', function (Blueprint $table) {
             $table->id();
             $table->string('naziv');
-            $table->text('opis')->nullable();
+            $table->text('karakteristike')->nullable();
             $table->decimal('cena', 10, 2);
             $table->string('putanja_slike')->nullable(); 
             $table->foreignId('kategorija_id')->constrained('kategorije')->onDelete('cascade');
