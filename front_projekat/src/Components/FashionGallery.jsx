@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./FashionGallery.css";
 import Navigation from './Navigation';
+import Pagination from "./Pagination";
 const FashionGallery = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -91,15 +92,12 @@ const FashionGallery = () => {
       </div>
 
     
-      <div className="pagination">
-        <button onClick={handlePrevPage} disabled={page === 1}>
-          Prev
-        </button>
-        <span>Page {page} of {totalPages}</span>
-        <button onClick={handleNextPage} disabled={page === totalPages}>
-          Next
-        </button>
-      </div>
+       <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
     </div>
     </>
   );

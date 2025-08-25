@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./OrdersPage.css";
 import Navigation from "./Navigation";
-
+import Pagination from "./Pagination";
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [statusFilter, setStatusFilter] = useState("Svi");
@@ -169,25 +169,12 @@ const OrdersPage = () => {
         </table>
 
         
-        <div className="pagination">
-          <button
-            onClick={handlePrevPage}
-            disabled={pagination.currentPage === 1}
-            className="pagination-button"
-          >
-            Prethodna
-          </button>
-          <span className="pagination-info">
-            Stranica {pagination.currentPage} od {pagination.totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={pagination.currentPage === pagination.totalPages}
-            className="pagination-button"
-          >
-            Sledeća
-          </button>
-        </div>
+     <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
       </div>
     </div>
   );

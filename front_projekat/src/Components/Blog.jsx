@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Blog.css';
 import { useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
+import Pagination from './Pagination';
 import axios from 'axios';
 
 const Blog = () => {
@@ -92,25 +93,12 @@ const Blog = () => {
         </div>
 
       
-        <div className="pagination">
-          <button
-            onClick={handlePrevPage}
-            disabled={pagination.currentPage === 1}
-            className="pagination-button"
-          >
-            Prethodna
-          </button>
-          <span className="pagination-info">
-            Stranica {pagination.currentPage} od {pagination.totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={pagination.currentPage === pagination.totalPages}
-            className="pagination-button"
-          >
-            Sledeća
-          </button>
-        </div>
+           <Pagination
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          onPrev={handlePrevPage}
+          onNext={handleNextPage}
+        />
       </div>
     </div>
   );

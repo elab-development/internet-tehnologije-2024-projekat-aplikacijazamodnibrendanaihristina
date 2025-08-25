@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Blog.css';
 import { useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
-
+import Pagination from './Pagination';
 const blogPosts = [
   {
     id: 1,
@@ -126,25 +126,12 @@ const Blog = () => {
           ))}
         </div>
 
-        <div className="pagination">
-          <button
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-            className="pagination-button"
-          >
-            Prethodna
-          </button>
-          <span className="pagination-info">
-            Stranica {currentPage} od {totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-            className="pagination-button"
-          >
-            Sledeća
-          </button>
-        </div>
+         <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPrev={handlePrevPage}
+                  onNext={handleNextPage}
+                />
       </div>
     </div>
   );

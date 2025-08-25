@@ -3,6 +3,7 @@ import { useParams, useNavigate,useLocation  } from "react-router-dom";
 import axios from 'axios';
 import "./ProductsPage.css";
 import Navigation from "./Navigation";
+import Pagination from "./Pagination";
 import CartPopup from "./CartPopup"; 
 
 const ProductsPage = () => {
@@ -105,12 +106,24 @@ const ProductsPage = () => {
 
 
 
-  
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= pagination.totalPages) {
-      setPagination({ ...pagination, currentPage: page });
+    const handleNextPage = () => {
+    if (pagination.currentPage < pagination.totalPages) {
+      setPagination((prev) => ({
+        ...prev,
+        currentPage: prev.currentPage + 1,
+      }));
     }
   };
+
+  const handlePrevPage = () => {
+    if (pagination.currentPage > 1) {
+      setPagination((prev) => ({
+        ...prev,
+        currentPage: prev.currentPage - 1,
+      }));
+    }
+  };
+
 
   return (
     <div>
@@ -169,21 +182,12 @@ const ProductsPage = () => {
           </div>
 
         
-          <div className="pagination">
-            <button 
-              onClick={() => handlePageChange(pagination.currentPage - 1)} 
-              disabled={pagination.currentPage === 1}
-            >
-              Prethodna
-            </button>
-            <span>{pagination.currentPage} / {pagination.totalPages}</span>
-            <button 
-              onClick={() => handlePageChange(pagination.currentPage + 1)} 
-              disabled={pagination.currentPage === pagination.totalPages}
-            >
-              Sledeća
-            </button>
-          </div>
+      <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
         </div>
       </div>
       {isCartOpen && (

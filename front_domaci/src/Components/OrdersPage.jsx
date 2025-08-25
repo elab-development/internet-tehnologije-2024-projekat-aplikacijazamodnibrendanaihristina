@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./OrdersPage.css";
 import Navigation from "./Navigation";
-
+import Pagination from "./Pagination";
 const OrdersPage = () => {
   const [orders, setOrders] = useState([
     
@@ -131,9 +131,16 @@ const OrdersPage = () => {
     );
   };
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
@@ -204,31 +211,12 @@ const OrdersPage = () => {
           </tbody>
         </table>
 
-        <div className="pagination">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className={currentPage === 1 ? "disabled" : ""}
-            disabled={currentPage === 1}
-          >
-            Prethodna
-          </button>
-          {[...Array(totalPages)].map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? "active" : ""}
-            >
-              {index + 1}
-            </button>
-          ))}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className={currentPage === totalPages ? "disabled" : ""}
-            disabled={currentPage === totalPages}
-          >
-            Sledeća
-          </button>
-        </div>
+         <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
       </div>
     </div>
   );
